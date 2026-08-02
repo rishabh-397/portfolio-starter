@@ -15,17 +15,12 @@ export default function CodingProfiles() {
   const [reposError, setReposError] = useState(false);
 
   useEffect(() => {
-    fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100`)
+    fetch("/api/github-repos")
       .then((res) => {
-        if (!res.ok) throw new Error("GitHub API error");
+        if (!res.ok) throw new Error("GitHub route error");
         return res.json();
       })
-      .then((data) => {
-        const top = [...data]
-          .sort((a, b) => b.stargazers_count - a.stargazers_count)
-          .slice(0, 3);
-        setRepos(top);
-      })
+      .then((data) => setRepos(data.repos || []))
       .catch(() => setReposError(true));
   }, []);
 
