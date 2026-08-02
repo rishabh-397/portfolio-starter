@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #E8A33D;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink text-paper font-body antialiased transition-colors duration-300;
+  /*
+    Drop your own background image here later, e.g.:
+    background-image: url('/your-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  */
+}
+
+body.light {
+  @apply bg-paper text-ink;
+}
+
+::selection {
+  background: #E8A33D;
+  color: #0B1220;
+}
+
+/* visible keyboard focus everywhere -- accessibility floor, don't skip this */
+:focus-visible {
+  outline: 2px solid #E8A33D;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.hairline {
+  @apply border-line;
+}
+
+.mono-tag {
+  @apply font-mono text-xs tracking-wide uppercase text-circuit;
+}
