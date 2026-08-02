@@ -5,6 +5,6 @@ export default function robots() {
       allow: "/",
       disallow: ["/admin", "/api"],
     },
-    sitemap: "https://portfolio-website-ruddy-six-25.vercel.app/sitemap.xml",
+    sitemap: "https://portfolio-starter-eta.vercel.app/sitemap.xml",
   };
 }
