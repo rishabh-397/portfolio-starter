@@ -6,6 +6,7 @@ import EasterEgg from "@/components/EasterEgg";
 import { LanguageProvider } from "@/components/LanguageContext";
 import CookieConsent from "@/components/CookieConsent";
 import AuthProvider from "@/components/AuthProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 const display = Fraunces({
   subsets: ["latin"],
@@ -81,6 +82,7 @@ export default function RootLayout({ children }) {
           <EasterEgg />
           <CookieConsent />
           {children}
+          <Analytics />
         </AuthProvider>
         </LanguageProvider>
       </body>
