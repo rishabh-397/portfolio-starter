@@ -27,7 +27,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://rishabh-portfolio.vercel.app"), // update after you deploy
+  metadataBase: new URL("https://portfolio-website-ruddy-six-25.vercel.app"),
   title: "Rishabh Chaturvedi — Software Engineer",
   description:
     "Portfolio, projects, and resume of Rishabh Chaturvedi — Computer Science undergraduate at VIT Bhopal, full-stack and ML developer.",
