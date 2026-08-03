@@ -1,14 +1,31 @@
 import { addMessage } from "@/lib/messages";
 import { Resend } from "resend";
+import { z } from "zod";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
-export async function POST(req) {
-  const { name, email, message } = await req.json();
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100),
+  email: z.string().trim().email("Invalid email address").max(200),
+  message: z.string().trim().min(1, "Message is required").max(2000),
+});
 
-  if (!name || !email || !message) {
-    return Response.json({ error: "Missing fields" }, { status: 400 });
+export async function POST(req) {
+  let body;
+  try {
+    body = await req.json();
+  } catch {
+    return Response.json({ error: "Invalid request body" }, { status: 400 });
   }
+
+  const parsed = contactSchema.safeParse(body);
+  if (!parsed.success) {
+    return Response.json(
+      { error: parsed.error.errors[0]?.message || "Invalid input" },
+      { status: 400 }
+    );
+  }
+  const { name, email, message } = parsed.data;
 
   await addMessage({ name, email, message });
 

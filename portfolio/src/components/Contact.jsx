@@ -8,6 +8,7 @@ const WHATSAPP_NUMBER = "916267496883"; // +91 assumed -- confirm with Rishabh
 
 export default function Contact() {
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [errorMsg, setErrorMsg] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -21,9 +22,16 @@ export default function Contact() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      setStatus(res.ok ? "sent" : "error");
-      if (res.ok) e.target.reset();
+      if (res.ok) {
+        setStatus("sent");
+        e.target.reset();
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setErrorMsg(data.error || "Something went wrong.");
+        setStatus("error");
+      }
     } catch {
+      setErrorMsg("Something went wrong.");
       setStatus("error");
     }
   }
@@ -79,7 +87,7 @@ export default function Contact() {
         )}
         {status === "error" && (
           <p className="text-sm text-red-400">
-            Something went wrong. Try again, or email me directly.
+            {errorMsg} Try again, or email me directly.
           </p>
         )}
       </form>
