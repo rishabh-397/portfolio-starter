@@ -3,10 +3,12 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { FileDown } from "lucide-react";
 
 export default function AdminPage() {
   const { data: session, status } = useSession();
   const [messages, setMessages] = useState(null);
+  const [resumeDownloads, setResumeDownloads] = useState(null);
 
   useEffect(() => {
     if (session) {
@@ -17,6 +19,7 @@ export default function AdminPage() {
         }
         const d = await r.json();
         setMessages(d.messages || []);
+        setResumeDownloads(d.resumeDownloads ?? 0);
       });
     }
   }, [session]);
@@ -53,7 +56,7 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen max-w-3xl mx-auto px-6 py-16">
       <div className="flex items-center justify-between mb-8">
-        <p className="font-display italic text-2xl">Contact messages</p>
+        <p className="font-display italic text-2xl">Dashboard</p>
         <button
           onClick={() => signOut()}
           className="text-sm border hairline rounded-full px-4 py-1.5 hover:border-signal transition-colors"
@@ -61,6 +64,20 @@ export default function AdminPage() {
           Sign out
         </button>
       </div>
+
+      {messages !== "unauthorized" && resumeDownloads !== null && (
+        <div className="rounded-xl border hairline p-4 mb-8 flex items-center gap-3 w-fit">
+          <FileDown size={18} className="text-signal" />
+          <div>
+            <p className="text-2xl font-display italic">{resumeDownloads}</p>
+            <p className="text-xs opacity-60">resume downloads</p>
+          </div>
+        </div>
+      )}
+
+      <p className="font-mono text-xs uppercase tracking-wide text-circuit mb-4">
+        Contact messages
+      </p>
 
       {messages === null && <p className="opacity-60">Loading messages...</p>}
       {messages === "unauthorized" && (

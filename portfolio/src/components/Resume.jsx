@@ -1,4 +1,11 @@
+"use client";
+
 import Reveal from "./Reveal";
+
+function trackDownload() {
+  // Fire-and-forget -- never blocks or delays the actual download.
+  fetch("/api/track-download", { method: "POST" }).catch(() => {});
+}
 
 export default function Resume() {
   return (
@@ -24,6 +31,7 @@ export default function Resume() {
           <a
             href="/resume.pdf"
             download
+            onClick={trackDownload}
             className="rounded-full bg-signal text-ink px-5 py-2.5 font-medium hover:opacity-90 active:scale-95 transition-all"
           >
             Download

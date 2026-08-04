@@ -19,6 +19,7 @@ import { VscVscode } from "react-icons/vsc";
 import { Users, Zap, Clock } from "lucide-react";
 import Reveal from "./Reveal";
 import OrbitPlanet from "./OrbitPlanet";
+import SkillsGraph from "./SkillsGraph";
 
 const ICONS = {
   Python: SiPython,
@@ -59,7 +60,9 @@ export default function Skills() {
       <p className="mono-tag mb-3">// skills</p>
       <h2 className="font-display italic text-3xl mb-10">What I reach for.</h2>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <SkillsGraph />
+
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mt-14">
         {SKILLS.map((s) => (
           <div key={s.group}>
             <h3 className="font-mono text-xs uppercase tracking-wide text-circuit mb-3">

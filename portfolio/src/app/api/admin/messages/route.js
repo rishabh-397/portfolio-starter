@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]/route";
-import { readMessages } from "@/lib/messages";
+import { readMessages, getStat } from "@/lib/messages";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -8,5 +8,11 @@ export async function GET() {
   if (!session || session.user.email !== process.env.ADMIN_EMAIL) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
-return Response.json({ messages: await readMessages() });
+
+  const [messages, resumeDownloads] = await Promise.all([
+    readMessages(),
+    getStat("resume_downloads"),
+  ]);
+
+  return Response.json({ messages, resumeDownloads });
 }

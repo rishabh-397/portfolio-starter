@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { MessageCircleQuestion } from "lucide-react";
 import Reveal from "./Reveal";
 import TiltCard from "./TiltCard";
+import { useChatbotControl } from "./ChatbotControlContext";
 
 const PROJECTS = [
   {
@@ -29,6 +31,7 @@ const ALL_TAGS = ["All", ...new Set(PROJECTS.flatMap((p) => p.tags))];
 
 export default function Projects() {
   const [filter, setFilter] = useState("All");
+  const { askChatbot } = useChatbotControl();
   const visible =
     filter === "All" ? PROJECTS : PROJECTS.filter((p) => p.tags.includes(filter));
 
@@ -55,19 +58,34 @@ export default function Projects() {
       <div className="grid md:grid-cols-3 gap-6">
         {visible.map((p) => (
           <TiltCard
-            as="a"
             key={p.title}
-            href={p.link}
             className="rounded-xl border hairline p-5 hover:border-signal transition-colors flex flex-col gap-3"
           >
             <h3 className="font-display italic text-xl">{p.title}</h3>
             <p className="text-sm opacity-80">{p.blurb}</p>
-            <div className="flex gap-2 mt-auto pt-2">
+            <div className="flex gap-2 flex-wrap">
               {p.tags.map((t) => (
                 <span key={t} className="mono-tag border hairline rounded px-2 py-0.5">
                   {t}
                 </span>
               ))}
+            </div>
+            <div className="flex items-center justify-between mt-auto pt-2">
+              <a
+                href={p.link}
+                className="text-sm text-signal hover:opacity-80 transition-opacity"
+              >
+                View project →
+              </a>
+              <button
+                onClick={() =>
+                  askChatbot(`Can you explain the ${p.title} project in more depth?`)
+                }
+                className="flex items-center gap-1.5 text-xs border hairline rounded-full px-3 py-1.5 hover:border-signal transition-colors"
+              >
+                <MessageCircleQuestion size={13} />
+                Ask AI
+              </button>
             </div>
           </TiltCard>
         ))}

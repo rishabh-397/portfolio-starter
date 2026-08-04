@@ -2,6 +2,22 @@ import clientPromise from "./mongodb";
 
 const DB_NAME = "portfolio";
 const COLLECTION = "messages";
+const STATS_COLLECTION = "stats";
+
+export async function incrementStat(key) {
+  const client = await clientPromise;
+  const db = client.db(DB_NAME);
+  await db
+    .collection(STATS_COLLECTION)
+    .updateOne({ _id: key }, { $inc: { count: 1 } }, { upsert: true });
+}
+
+export async function getStat(key) {
+  const client = await clientPromise;
+  const db = client.db(DB_NAME);
+  const doc = await db.collection(STATS_COLLECTION).findOne({ _id: key });
+  return doc?.count || 0;
+}
 
 export async function readMessages() {
   const client = await clientPromise;

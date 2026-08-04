@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
+import { useChatbotControl } from "./ChatbotControlContext";
 
 const SUGGESTIONS = [
   "What's their strongest project?",
@@ -10,6 +11,7 @@ const SUGGESTIONS = [
 ];
 
 export default function Chatbot() {
+  const { pendingOpen, pendingMessage, setPendingOpen, setPendingMessage } = useChatbotControl();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
     { role: "assistant", content: "Hi! Ask me anything about this person's resume or projects." },
@@ -21,6 +23,18 @@ export default function Chatbot() {
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open]);
+
+  useEffect(() => {
+    if (pendingOpen) {
+      setOpen(true);
+      if (pendingMessage) {
+        send(pendingMessage);
+        setPendingMessage(null);
+      }
+      setPendingOpen(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingOpen]);
 
   async function send(text) {
     const userMsg = { role: "user", content: text };

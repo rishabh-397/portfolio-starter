@@ -1,11 +1,7 @@
-// Simple in-memory rate limiter (per server instance -- fine for a portfolio site).
 const requestLog = new Map();
 const WINDOW_MS = 60_000;
 const MAX_REQUESTS = 10;
 
-// Replace this with real content about you: your resume text, project
-// descriptions, skills, etc. This is what makes the chatbot's answers
-// accurate instead of generic.
 const RESUME_CONTEXT = `
 You are a helpful assistant embedded in a developer's portfolio site.
 Answer questions about this person based ONLY on the context below.
@@ -42,6 +38,19 @@ Data Science (Indiana University Indianapolis), Problem Solving
 Languages spoken: English (fluent), Hindi (native)
 
 Availability: Open to full-time placements / internships.
+
+Projects: (Rishabh hasn't filled these in yet -- once his two in-progress
+projects are ready, replace this line with real descriptions: what problem
+each one solves, the stack used, one interesting technical decision, and one
+hard bug fixed. Until then, if asked about a specific project, be honest that
+details aren't published on the site yet and suggest asking Rishabh directly
+via the contact form or WhatsApp button.)
+
+When someone asks you to explain a project in depth, go beyond a one-line
+summary: cover what problem it solves, why the tech stack was chosen, and
+any interesting trade-off or challenge -- but only using the real details
+given above. Never invent architecture, bugs, or decisions that aren't in
+this context.
 `;
 
 function rateLimited(ip) {
@@ -96,8 +105,6 @@ export async function POST(req) {
       );
     }
 
-    // Pass the streamed response straight through to the browser --
-    // the client reads it chunk-by-chunk for the typewriter effect.
     return new Response(groqRes.body, {
       headers: {
         "Content-Type": "text/event-stream",

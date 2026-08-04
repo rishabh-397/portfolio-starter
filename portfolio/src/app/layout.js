@@ -7,6 +7,8 @@ import { LanguageProvider } from "@/components/LanguageContext";
 import CookieConsent from "@/components/CookieConsent";
 import AuthProvider from "@/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
+import { ChatbotControlProvider } from "@/components/ChatbotControlContext";
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
 const display = Fraunces({
   subsets: ["latin"],
@@ -77,12 +79,15 @@ export default function RootLayout({ children }) {
         />
         <LanguageProvider>
         <AuthProvider>
+        <ChatbotControlProvider>
+          <ServiceWorkerRegister />
           <BackgroundVideo />
           <CustomCursor />
           <EasterEgg />
           <CookieConsent />
           {children}
           <Analytics />
+        </ChatbotControlProvider>
         </AuthProvider>
         </LanguageProvider>
       </body>
