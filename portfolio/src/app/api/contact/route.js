@@ -1,14 +1,8 @@
 import { addMessage } from "@/lib/messages";
 import { Resend } from "resend";
-import { z } from "zod";
+import { contactSchema } from "@/lib/validation";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
-
-const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Invalid email address").max(200),
-  message: z.string().trim().min(1, "Message is required").max(2000),
-});
 
 export async function POST(req) {
   let body;

@@ -43,12 +43,14 @@ function SchoolIcon({ logo, school }) {
   }
 
   return (
+    /* eslint-disable @next/next/no-img-element -- small local logo with a manual onError fallback */
     <img
       src={logo}
       alt={`${school} logo`}
       onError={() => setFailed(true)}
       className="w-10 h-10 rounded-full border hairline object-contain bg-white/5 shrink-0 p-1"
     />
+    /* eslint-enable @next/next/no-img-element */
   );
 }
 
@@ -56,7 +58,7 @@ export default function Education() {
   return (
     <section id="education" className="max-w-5xl mx-auto px-6 py-20 border-t hairline">
       <Reveal>
-        <p className="mono-tag mb-3">// education</p>
+        <p className="mono-tag mb-3">{"// education"}</p>
         <h2 className="font-display italic text-3xl mb-10">Where it started.</h2>
 
         <div className="space-y-4">

@@ -35,7 +35,7 @@ export default function EasterEgg() {
   return (
     <div className="fixed inset-x-0 bottom-24 z-[200] flex justify-center px-4 pointer-events-none">
       <div className="bg-signal text-ink rounded-full px-5 py-2.5 font-mono text-sm shadow-2xl animate-bounce">
-        Nice pattern recognition -- that's exactly the kind of attention to
+        Nice pattern recognition -- that&apos;s exactly the kind of attention to
         detail I try to bring to code too. 👋
       </div>
     </div>

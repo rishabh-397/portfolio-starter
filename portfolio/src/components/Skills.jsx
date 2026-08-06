@@ -57,7 +57,7 @@ export default function Skills() {
     <section id="skills" className="max-w-5xl mx-auto px-6 py-20 border-t hairline">
       <Reveal>
       <OrbitPlanet />
-      <p className="mono-tag mb-3">// skills</p>
+      <p className="mono-tag mb-3">{"// skills"}</p>
       <h2 className="font-display italic text-3xl mb-10">What I reach for.</h2>
 
       <SkillsGraph />

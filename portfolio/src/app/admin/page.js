@@ -82,7 +82,7 @@ export default function AdminPage() {
       {messages === null && <p className="opacity-60">Loading messages...</p>}
       {messages === "unauthorized" && (
         <p className="opacity-70">
-          You're signed in, but this Google account doesn't have admin access
+          You&apos;re signed in, but this Google account doesn&apos;t have admin access
           on this site.
         </p>
       )}

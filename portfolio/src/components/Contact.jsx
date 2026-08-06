@@ -39,7 +39,7 @@ export default function Contact() {
   return (
     <section id="contact" className="max-w-5xl mx-auto px-6 py-20 border-t hairline">
       <Reveal>
-      <p className="mono-tag mb-3">// contact</p>
+      <p className="mono-tag mb-3">{"// contact"}</p>
       <h2 className="font-display italic text-3xl mb-6">Say hello.</h2>
 
       <a
@@ -83,7 +83,7 @@ export default function Contact() {
           {status === "sending" ? "Sending…" : "Send message"}
         </button>
         {status === "sent" && (
-          <p className="text-sm text-circuit">Sent — I'll get back to you soon.</p>
+          <p className="text-sm text-circuit">Sent — I&apos;ll get back to you soon.</p>
         )}
         {status === "error" && (
           <p className="text-sm text-red-400">

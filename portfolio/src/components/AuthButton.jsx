@@ -28,12 +28,14 @@ export default function AuthButton() {
     <div className="relative">
       <button onClick={() => setOpen((v) => !v)} className="flex items-center">
         {session.user.image ? (
+          /* eslint-disable @next/next/no-img-element -- external Google avatar URL, unknown at build time, not worth an images.remotePatterns entry for every possible Google host */
           <img
             src={session.user.image}
             alt={session.user.name || "Account"}
             className="w-7 h-7 rounded-full border-2"
             style={{ borderColor: "var(--accent)" }}
           />
+          /* eslint-enable @next/next/no-img-element */
         ) : (
           <div className="w-7 h-7 rounded-full bg-signal text-ink flex items-center justify-center text-xs font-medium">
             {session.user.name?.[0] || "U"}

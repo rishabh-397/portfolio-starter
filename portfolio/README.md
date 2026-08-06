@@ -1,56 +1,97 @@
-# Portfolio Starter
+# Rishabh Chaturvedi — Portfolio
 
-A Next.js + Tailwind portfolio scaffold: hero, about, skills, coding-profile
-stats (GitHub/LeetCode/HackerRank), filterable projects, resume, contact form,
-an AI chatbot backed by the Anthropic API, and a VS Code-style status bar.
+An advanced, full-stack placement portfolio built with Next.js (App Router),
+featuring a real AI chatbot, live coding-profile stats, Google-authenticated
+admin dashboard, and a database-backed contact pipeline.
 
-## Design direction
+**Live site:** https://portfolio-starter-eta.vercel.app
 
-- **Palette**: deep ink background (`#0B1220`), warm amber signal color
-  (`#E8A33D`), muted teal accent (`#5EC8B8`) — a code-editor feel rather than
-  a generic gradient hero.
-- **Type**: Fraunces (display/italic headlines) + Inter (body) + JetBrains
-  Mono (data, tags, code).
-- **Signature element**: the fixed bottom status bar that mimics VS Code's
-  status bar and tracks which section you're viewing — ties the whole site
-  back to "built by a developer, in a code editor."
+## Tech stack
 
-Treat this as a starting point, not a finished product — swap in your own
-copy, projects, and take the design further once the structure feels right.
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 14 (App Router) |
+| Styling | Tailwind CSS |
+| Animation | Framer Motion |
+| Auth | NextAuth.js (Google OAuth) |
+| Database | MongoDB Atlas |
+| AI Chatbot | Groq (Llama 3.3 70B), streamed |
+| Email | Resend |
+| Analytics | Vercel Web Analytics |
+| Deployment | Vercel |
+| Testing | Jest + React Testing Library |
+| CI | GitHub Actions |
 
-## Getting started (in VS Code)
+## Features
 
-1. Open this folder in VS Code.
-2. Install dependencies:
-   ```
-   npm install
-   ```
-3. Copy the env file and add your Anthropic API key (only needed for the
-   chatbot — everything else works without it):
-   ```
-   cp .env.example .env.local
-   ```
-4. Run the dev server:
-   ```
-   npm run dev
-   ```
-5. Open http://localhost:3000
+- Animated hero with a live-typed code snippet and profile photo
+- Real bio, education history (with institution logos), and a categorized
+  skills section with an interactive radial skills graph
+- Live GitHub/LeetCode/HackerRank profile cards, including top starred repos
+  pulled live from the GitHub API (server-cached to avoid rate limits)
+- An AI chatbot (streaming responses) that answers questions about the
+  resume and can explain individual projects in depth on request
+- Dark/light mode, a runtime accent-color picker, and a partial
+  English/Hindi language switcher
+- Command palette (Cmd/Ctrl+K), 3D tilt project cards, custom cursor,
+  scroll-reveal animations, and a VS Code-style status bar with scroll
+  progress
+- A real contact pipeline: Zod-validated submissions save to MongoDB and
+  trigger an email notification, with a WhatsApp quick-contact option
+- Google sign-in for visitors, with a separate admin-only dashboard
+  (`/admin`) to view messages and resume-download analytics
+- PWA support (installable, works offline for cached pages)
+- SEO: sitemap, robots.txt, Open Graph/Twitter meta, and JSON-LD structured
+  data for rich search results
+- Security headers, input validation, and a documented environment-variable
+  setup for every integration
 
-## Where to put your real content
+## Architecture
 
-- `/public/resume.pdf` — your resume file
-- `src/components/About.jsx` — your bio + timeline
-- `src/components/Skills.jsx` — your real skill list
-- `src/components/CodingProfiles.jsx` — your GitHub/LeetCode/HackerRank usernames
-- `src/components/Projects.jsx` — your real projects
-- `src/app/api/chat/route.js` — `RESUME_CONTEXT` (what the chatbot knows about you)
+```mermaid
+flowchart TD
+    Visitor[Visitor's Browser] -->|HTTPS| Vercel[Vercel Edge / Next.js App]
 
-## Next steps (Month 2-3, from the roadmap)
+    Vercel -->|Streamed chat| Groq[Groq API - Llama 3.3]
+    Vercel -->|Save + read messages/stats| Mongo[(MongoDB Atlas)]
+    Vercel -->|Send notification| Resend[Resend Email API]
+    Vercel -->|OAuth sign-in| Google[Google OAuth]
+    Vercel -->|Cached, 1x/hour| GitHub[GitHub REST API]
 
-- Wire the contact form to a real database + email notification
-- Add dark/light-mode-aware code screenshots to project cards
-- Add a `/api/leetcode` route that proxies a community LeetCode GraphQL API
-  server-side, so the LeetCode card shows live stats instead of just a link
-- Add tests, CI/CD (GitHub Actions), and a Lighthouse pass before deploying
-- Deploy on Vercel: `vercel.com/new` → import this repo → add
-  `ANTHROPIC_API_KEY` as an environment variable in the dashboard
+    Admin[Admin - signed in with Google] -->|/admin, gated by ADMIN_EMAIL| Vercel
+
+    subgraph Vercel App
+        Pages[App Router Pages]
+        API[API Routes: chat, contact, admin, auth]
+        Pages --> API
+    end
+```
+
+## Local development
+
+```bash
+npm install
+cp .env.example .env.local   # then fill in your real values
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Environment variables
+
+See `.env.example` for the full list. You'll need free accounts for:
+Groq (chatbot), Google Cloud (OAuth), MongoDB Atlas (database), and Resend
+(email notifications).
+
+## Testing
+
+```bash
+npm test        # run the Jest test suite
+npm run lint    # ESLint
+npm run format  # Prettier
+```
+
+## Deployment
+
+Deployed on Vercel, auto-deploying on every push to `main` via GitHub
+Actions CI (lint + test + build check) and Vercel's own build pipeline.

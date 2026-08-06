@@ -38,8 +38,8 @@ export default function Projects() {
   return (
     <section id="projects" className="max-w-5xl mx-auto px-6 py-20 border-t hairline">
       <Reveal>
-      <p className="mono-tag mb-3">// projects</p>
-      <h2 className="font-display italic text-3xl mb-8">Things I've shipped.</h2>
+      <p className="mono-tag mb-3">{"// projects"}</p>
+      <h2 className="font-display italic text-3xl mb-8">Things I&apos;ve shipped.</h2>
 
       <div className="flex flex-wrap gap-2 mb-10">
         {ALL_TAGS.map((tag) => (

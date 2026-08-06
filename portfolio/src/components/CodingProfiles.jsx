@@ -27,7 +27,7 @@ export default function CodingProfiles() {
   return (
     <section id="profiles" className="max-w-5xl mx-auto px-6 py-20 border-t hairline">
       <Reveal>
-      <p className="mono-tag mb-3">// coding activity dashboard</p>
+      <p className="mono-tag mb-3">{"// coding activity dashboard"}</p>
       <h2 className="font-display italic text-3xl mb-10">Where the practice shows.</h2>
 
       <div className="grid md:grid-cols-3 gap-6 mb-6">
@@ -41,12 +41,14 @@ export default function CodingProfiles() {
             <SiGithub size={16} /> GitHub
           </h3>
           {!imgFailed ? (
+            /* eslint-disable @next/next/no-img-element -- external SVG-generating stats image with a manual onError fallback; next/image complicates both */
             <img
               src={`https://github-readme-stats.vercel.app/api?username=${GITHUB_USERNAME}&show_icons=true&theme=transparent&hide_border=true`}
               alt="GitHub stats"
               onError={() => setImgFailed(true)}
               className="w-full h-auto"
             />
+            /* eslint-enable @next/next/no-img-element */
           ) : (
             <p className="text-sm opacity-80">View my repos & contributions →</p>
           )}
@@ -83,7 +85,7 @@ export default function CodingProfiles() {
         </h3>
 
         {reposError && (
-          <p className="text-sm opacity-60">Couldn't load repos right now.</p>
+          <p className="text-sm opacity-60">Couldn&apos;t load repos right now.</p>
         )}
         {!repos && !reposError && (
           <div className="grid sm:grid-cols-3 gap-4">

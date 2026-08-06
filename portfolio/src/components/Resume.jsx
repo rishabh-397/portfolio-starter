@@ -11,7 +11,7 @@ export default function Resume() {
   return (
     <section id="resume" className="max-w-5xl mx-auto px-6 py-20 border-t hairline">
       <Reveal>
-      <p className="mono-tag mb-3">// resume</p>
+      <p className="mono-tag mb-3">{"// resume"}</p>
       <h2 className="font-display italic text-3xl mb-8">The short version.</h2>
 
       <div className="rounded-xl border hairline p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">

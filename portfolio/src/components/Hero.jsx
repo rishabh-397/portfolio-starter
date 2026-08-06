@@ -58,7 +58,7 @@ export default function Hero() {
             title="Open to opportunities"
           />
         </div>
-        <p className="mono-tag mb-4">// portfolio.jsx</p>
+        <p className="mono-tag mb-4">{"// portfolio.jsx"}</p>
         <motion.h1
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -69,8 +69,8 @@ export default function Hero() {
           <br /> {t.heroTitle2}
         </motion.h1>
         <p className="mt-6 text-lg opacity-80 max-w-md">
-          I'm a software engineer who likes taking ideas from a blank file to
-          something people actually use. Here's my work, my resume, and an AI
+          I&apos;m a software engineer who likes taking ideas from a blank file to
+          something people actually use. Here&apos;s my work, my resume, and an AI
           assistant that knows both better than a bullet list ever could.
         </p>
         <div className="mt-8 flex gap-4">
