@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { GitBranch, CheckCircle2 } from "lucide-react";
 
-const SECTIONS = ["top", "about", "education", "skills", "profiles", "projects", "resume", "contact"];
+const SECTIONS = ["top", "about", "education", "certifications", "skills", "profiles", "projects", "resume", "contact"];
 
 export default function StatusBar() {
   const [active, setActive] = useState("top");

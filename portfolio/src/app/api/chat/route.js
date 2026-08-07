@@ -33,7 +33,11 @@ Certifications: Postman API Fundamentals Student Expert, Website Development
 Tutorial (Infosys Springboard), Introduction to Machine Learning (NPTEL),
 Introduction to Large Language Models (Udacity), Insights on Computational
 Data Science (Indiana University Indianapolis), Problem Solving
-(HackerRank), MATLAB Certificate, Cybersecurity Essentials (IBM SkillsBuild)
+(HackerRank), MATLAB Certificate, Cybersecurity Essentials (IBM SkillsBuild),
+Marketing Analytics (NPTEL, 2026), Tata Cybersecurity Analyst Certificate (2026),
+Oracle Cloud Infrastructure Certified AI Foundations Associate (2026),
+Oracle Agentic AI Foundations Associate 1Z0-1157-26 (2026),
+The Bits and Bytes of Computer Networking (Coursera, 2025)
 
 Languages spoken: English (fluent), Hindi (native)
 

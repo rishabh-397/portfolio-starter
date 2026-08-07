@@ -8,7 +8,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import AuthButton from "./AuthButton";
 import { useLanguage } from "./LanguageContext";
 
-const LINK_HREFS = ["about", "education", "skills", "profiles", "projects", "resume", "contact"];
+const LINK_HREFS = ["about", "education", "certifications", "skills", "profiles", "projects", "resume", "contact"];
 
 export default function Navbar() {
   const { t } = useLanguage();

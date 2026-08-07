@@ -7,6 +7,7 @@ export const TRANSLATIONS = {
     nav: {
       about: "about",
       education: "education",
+      certifications: "certifications",
       skills: "skills",
       profiles: "profiles",
       projects: "projects",
@@ -20,6 +21,7 @@ export const TRANSLATIONS = {
     nav: {
       about: "परिचय",
       education: "शिक्षा",
+      certifications: "प्रमाणपत्र",
       skills: "कौशल",
       profiles: "प्रोफाइल",
       projects: "प्रोजेक्ट्स",

@@ -10,7 +10,7 @@ const EDUCATION = [
     location: "Sehore, Madhya Pradesh",
     degree: "Bachelor of Technology in Computer Science and Engineering",
     period: "2023 – 2027",
-    score: "CGPA: 7.99 / 10",
+    score: "CGPA: 8.01 / 10",
     logo: "/vit-logo.jpg",
   },
   {

@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 const COMMANDS = [
   { label: "Go to About", href: "#about" },
   { label: "Go to Education", href: "#education" },
+  { label: "Go to Certifications", href: "#certifications" },
   { label: "Go to Skills", href: "#skills" },
   { label: "Go to Coding Profiles", href: "#profiles" },
   { label: "Go to Projects", href: "#projects" },

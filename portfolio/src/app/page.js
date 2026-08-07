@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Education from "@/components/Education";
+import Certifications from "@/components/Certifications";
 import Skills from "@/components/Skills";
 import CodingProfiles from "@/components/CodingProfiles";
 import Projects from "@/components/Projects";
@@ -22,6 +23,7 @@ export default function Home() {
         <Hero />
         <About />
         <Education />
+        <Certifications />
         <Skills />
         <CodingProfiles />
         <Projects />
