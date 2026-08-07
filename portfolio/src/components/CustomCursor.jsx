@@ -24,6 +24,7 @@ export default function CustomCursor() {
       ref={dotRef}
       className="hidden md:block fixed top-0 left-0 w-6 h-6 rounded-full border-2 pointer-events-none z-[100] -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 ease-out"
       style={{ borderColor: "var(--accent)" }}
+      aria-hidden="true"
     />
   );
 }

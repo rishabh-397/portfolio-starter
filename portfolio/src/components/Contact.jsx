@@ -58,6 +58,7 @@ export default function Contact() {
         <input
           name="name"
           required
+          aria-label="Your name"
           placeholder="Your name"
           className="w-full bg-transparent border hairline rounded-lg px-4 py-3 focus:border-signal outline-none"
         />
@@ -65,6 +66,7 @@ export default function Contact() {
           name="email"
           type="email"
           required
+          aria-label="Your email"
           placeholder="Your email"
           className="w-full bg-transparent border hairline rounded-lg px-4 py-3 focus:border-signal outline-none"
         />
@@ -72,6 +74,7 @@ export default function Contact() {
           name="message"
           required
           rows={4}
+          aria-label="Your message"
           placeholder="What's on your mind?"
           className="w-full bg-transparent border hairline rounded-lg px-4 py-3 focus:border-signal outline-none"
         />

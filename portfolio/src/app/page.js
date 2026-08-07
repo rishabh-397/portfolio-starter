@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <Navbar />
       <CommandPalette />
-      <main className="pb-14">
+      <main id="main-content" className="pb-14">
         <Hero />
         <About />
         <Education />

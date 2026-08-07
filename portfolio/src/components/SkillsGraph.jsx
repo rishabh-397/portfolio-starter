@@ -80,6 +80,15 @@ export default function SkillsGraph() {
               onMouseEnter={() => setActive(cat.id)}
               onFocus={() => setActive(cat.id)}
               onClick={() => setActive(isActive ? null : cat.id)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setActive(isActive ? null : cat.id);
+                }
+              }}
+              role="button"
+              aria-pressed={isActive}
+              aria-label={`Show ${cat.label} skills`}
               tabIndex={0}
               className="cursor-pointer outline-none"
             >

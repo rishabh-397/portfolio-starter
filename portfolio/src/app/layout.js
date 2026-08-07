@@ -80,6 +80,12 @@ export default function RootLayout({ children }) {
         <LanguageProvider>
         <AuthProvider>
         <ChatbotControlProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[300] focus:bg-signal focus:text-ink focus:px-4 focus:py-2 focus:rounded-full focus:font-medium"
+          >
+            Skip to main content
+          </a>
           <ServiceWorkerRegister />
           <BackgroundVideo />
           <CustomCursor />

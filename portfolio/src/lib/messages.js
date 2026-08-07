@@ -19,6 +19,16 @@ export async function getStat(key) {
   return doc?.count || 0;
 }
 
+export async function getStatsWithPrefix(prefix) {
+  const client = await clientPromise;
+  const db = client.db(DB_NAME);
+  const docs = await db
+    .collection(STATS_COLLECTION)
+    .find({ _id: { $regex: `^${prefix}` } })
+    .toArray();
+  return docs.map((d) => ({ key: d._id, count: d.count || 0 }));
+}
+
 export async function readMessages() {
   const client = await clientPromise;
   const db = client.db(DB_NAME);

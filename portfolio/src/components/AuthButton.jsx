@@ -1,12 +1,20 @@
 "use client";
 
 import { useSession, signIn, signOut } from "next-auth/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 
 export default function AuthButton() {
   const { data: session, status } = useSession();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   if (status === "loading") return null;
 
@@ -26,7 +34,13 @@ export default function AuthButton() {
 
   return (
     <div className="relative">
-      <button onClick={() => setOpen((v) => !v)} className="flex items-center">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center"
+        aria-haspopup="true"
+        aria-expanded={open}
+        aria-label="Account menu"
+      >
         {session.user.image ? (
           /* eslint-disable @next/next/no-img-element -- external Google avatar URL, unknown at build time, not worth an images.remotePatterns entry for every possible Google host */
           <img

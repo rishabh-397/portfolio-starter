@@ -15,7 +15,7 @@ export default function BackgroundVideo() {
   }, []);
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
+    <div className="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
       <video
         ref={videoRef}
         autoPlay

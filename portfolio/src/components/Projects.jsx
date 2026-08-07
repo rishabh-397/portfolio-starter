@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { MessageCircleQuestion } from "lucide-react";
+import { useState, useEffect } from "react";
+import { MessageCircleQuestion, Flame } from "lucide-react";
 import Reveal from "./Reveal";
 import TiltCard from "./TiltCard";
 import { useChatbotControl } from "./ChatbotControlContext";
+
+function slugify(title) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+}
 
 const PROJECTS = [
   {
@@ -31,7 +35,31 @@ const ALL_TAGS = ["All", ...new Set(PROJECTS.flatMap((p) => p.tags))];
 
 export default function Projects() {
   const [filter, setFilter] = useState("All");
+  const [mostViewedSlug, setMostViewedSlug] = useState(null);
   const { askChatbot } = useChatbotControl();
+
+  useEffect(() => {
+    fetch("/api/project-stats")
+      .then((res) => res.json())
+      .then((data) => {
+        const stats = data.stats || [];
+        if (stats.length === 0) return;
+        const top = stats.reduce((a, b) => (b.count > a.count ? b : a));
+        if (top.count > 0) {
+          setMostViewedSlug(top.key.replace("project_click_", ""));
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  function trackProjectClick(title) {
+    fetch("/api/track-project-click", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title }),
+    }).catch(() => {});
+  }
+
   const visible =
     filter === "All" ? PROJECTS : PROJECTS.filter((p) => p.tags.includes(filter));
 
@@ -59,8 +87,13 @@ export default function Projects() {
         {visible.map((p) => (
           <TiltCard
             key={p.title}
-            className="rounded-xl border hairline p-5 hover:border-signal transition-colors flex flex-col gap-3"
+            className="relative rounded-xl border hairline p-5 hover:border-signal transition-colors flex flex-col gap-3"
           >
+            {mostViewedSlug === slugify(p.title) && (
+              <span className="absolute -top-2.5 right-4 flex items-center gap-1 bg-signal text-ink text-[10px] font-mono px-2 py-0.5 rounded-full">
+                <Flame size={10} /> most viewed
+              </span>
+            )}
             <h3 className="font-display italic text-xl">{p.title}</h3>
             <p className="text-sm opacity-80">{p.blurb}</p>
             <div className="flex gap-2 flex-wrap">
@@ -73,6 +106,7 @@ export default function Projects() {
             <div className="flex items-center justify-between mt-auto pt-2">
               <a
                 href={p.link}
+                onClick={() => trackProjectClick(p.title)}
                 className="text-sm text-signal hover:opacity-80 transition-opacity"
               >
                 View project →

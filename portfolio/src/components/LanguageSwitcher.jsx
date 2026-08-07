@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Globe } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 
@@ -23,6 +23,14 @@ export default function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
   const [notice, setNotice] = useState(false);
 
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   function pick(code) {
     setOpen(false);
     if (!TRANSLATED_CODES.includes(code)) {
@@ -36,6 +44,9 @@ export default function LanguageSwitcher() {
     <div className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
+        aria-haspopup="true"
+        aria-expanded={open}
+        aria-label="Change language"
         className="flex items-center gap-1.5 border hairline rounded-full px-3 py-1.5 text-xs font-mono hover:border-signal transition-colors"
       >
         <Globe size={14} /> {lang.toUpperCase()}

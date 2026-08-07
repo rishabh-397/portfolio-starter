@@ -1,6 +1,6 @@
 export default function OrbitPlanet() {
   return (
-    <div className="relative w-full h-40 mb-10 flex items-center justify-center overflow-hidden">
+    <div className="relative w-full h-40 mb-10 flex items-center justify-center overflow-hidden" aria-hidden="true">
       <div className="relative w-28 h-28">
         <div
           className="absolute inset-0 rounded-full animate-[spin_18s_linear_infinite]"

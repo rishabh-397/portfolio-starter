@@ -161,6 +161,7 @@ export default function Chatbot() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask a question…"
+              aria-label="Ask the AI assistant a question"
               className="flex-1 bg-transparent text-sm outline-none"
             />
             <button type="submit" aria-label="Send" className="text-signal">
