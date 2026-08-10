@@ -1,3 +1,4 @@
+// Simple in-memory rate limiter (per server instance -- fine for a portfolio site).
 const requestLog = new Map();
 const WINDOW_MS = 60_000;
 const MAX_REQUESTS = 10;
@@ -43,12 +44,48 @@ Languages spoken: English (fluent), Hindi (native)
 
 Availability: Open to full-time placements / internships.
 
-Projects: (Rishabh hasn't filled these in yet -- once his two in-progress
-projects are ready, replace this line with real descriptions: what problem
-each one solves, the stack used, one interesting technical decision, and one
-hard bug fixed. Until then, if asked about a specific project, be honest that
-details aren't published on the site yet and suggest asking Rishabh directly
-via the contact form or WhatsApp button.)
+Projects:
+
+1. EventBook — Seat Booking Platform (live: https://eventbook-pi.vercel.app,
+   code: https://github.com/rishabh-397/eventbook)
+   What it does: A full-stack ticket booking platform built to demonstrate
+   real concurrency handling (zero double-booking under simultaneous
+   requests), real-time seat updates, and production-style backend design --
+   not just a CRUD app.
+   Stack: React, Node.js/Express, PostgreSQL (Neon), Redis (Upstash),
+   Socket.io, k6 (load testing). Deployed on Vercel (frontend) and Render
+   (backend), with email via Brevo's HTTP API.
+   Key features: JWT auth with admin roles; event browsing with
+   seats-remaining urgency indicators; a curved venue-style seat map with
+   live availability via Socket.io; a hold (5 min) -> mock payment -> confirm
+   booking flow with an emailed QR code; a live "X viewing now" presence
+   indicator; an admin dashboard with booking/revenue stats; and a
+   background cron job that auto-releases unpaid holds.
+   The hardest technical problem: preventing double-booking when multiple
+   users try to book the same seat at once. Solved with Redis SET NX for
+   seat locking instead of a plain database UPDATE, because Redis operations
+   are atomic and single-threaded, which eliminates the race condition where
+   two requests both read "available" before either writes "held". This was
+   verified with a real k6 load test firing 50 concurrent requests at the
+   same seat: exactly 1 succeeded, 49 were cleanly rejected with 409
+   responses, 0 double-bookings, 0 server errors, ~82ms average response
+   time.
+   Other real design decisions worth mentioning if asked: a hold+expiry
+   pattern (not instant booking) that mirrors real ticketing systems; a cron
+   sweep as a backstop to Redis's TTL so Postgres never drifts out of sync
+   with lock state even if the app restarts mid-hold; rate limiting on the
+   booking endpoint (10 requests/min/IP) against bot abuse; a mock payment
+   gateway used deliberately instead of a live payment processor, to avoid
+   requiring business KYC verification for a portfolio project, while
+   keeping the hold->pay->confirm state machine itself fully real; and
+   Brevo's HTTP API for email instead of SMTP, since free hosting tiers like
+   Render commonly block outbound SMTP ports.
+   Known limitation, mention if relevant: the backend is on Render's free
+   tier, which spins down after inactivity, so the first request after idle
+   time can take 30-60 seconds to wake up.
+
+(Rishabh has one more project still in progress -- once it's ready, this
+context will be updated with real details for it too.)
 
 When someone asks you to explain a project in depth, go beyond a one-line
 summary: cover what problem it solves, why the tech stack was chosen, and

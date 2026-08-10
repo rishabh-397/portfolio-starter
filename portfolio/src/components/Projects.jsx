@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { MessageCircleQuestion, Flame } from "lucide-react";
+import { SiGithub } from "react-icons/si";
 import Reveal from "./Reveal";
 import TiltCard from "./TiltCard";
 import { useChatbotControl } from "./ChatbotControlContext";
@@ -12,10 +13,11 @@ function slugify(title) {
 
 const PROJECTS = [
   {
-    title: "Project One",
-    tags: ["React", "Node.js"],
-    blurb: "One line on the real problem this solved, not just what it uses.",
-    link: "#",
+    title: "EventBook — Seat Booking Platform",
+    tags: ["React", "Node.js", "PostgreSQL"],
+    blurb: "A concurrency-safe ticket booking platform — Redis distributed locks guarantee zero double-bookings even under 50 simultaneous requests, verified with real k6 load testing.",
+    link: "https://eventbook-pi.vercel.app",
+    github: "https://github.com/rishabh-397/eventbook",
   },
   {
     title: "Project Two",
@@ -104,13 +106,26 @@ export default function Projects() {
               ))}
             </div>
             <div className="flex items-center justify-between mt-auto pt-2">
-              <a
-                href={p.link}
-                onClick={() => trackProjectClick(p.title)}
-                className="text-sm text-signal hover:opacity-80 transition-opacity"
-              >
-                View project →
-              </a>
+              <div className="flex items-center gap-3">
+                <a
+                  href={p.link}
+                  onClick={() => trackProjectClick(p.title)}
+                  className="text-sm text-signal hover:opacity-80 transition-opacity"
+                >
+                  View project →
+                </a>
+                {p.github && (
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-signal hover:opacity-80 transition-opacity"
+                    aria-label={`View ${p.title} source on GitHub`}
+                  >
+                    <SiGithub size={16} />
+                  </a>
+                )}
+              </div>
               <button
                 onClick={() =>
                   askChatbot(`Can you explain the ${p.title} project in more depth?`)
