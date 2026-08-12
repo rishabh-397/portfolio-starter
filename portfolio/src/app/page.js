@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
+import TechMarquee from "@/components/TechMarquee";
 import About from "@/components/About";
 import Education from "@/components/Education";
 import Certifications from "@/components/Certifications";
@@ -21,6 +22,7 @@ export default function Home() {
       <CommandPalette />
       <main id="main-content" className="pb-14">
         <Hero />
+        <TechMarquee />
         <About />
         <Education />
         <Certifications />
