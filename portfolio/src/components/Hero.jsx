@@ -69,9 +69,9 @@ export default function Hero() {
           <br /> {t.heroTitle2}
         </motion.h1>
         <p className="mt-6 text-lg opacity-80 max-w-md">
-          I&apos;m a software engineer who likes taking ideas from a blank file to
-          something people actually use. Here&apos;s my work, my resume, and an AI
-          assistant that knows both better than a bullet list ever could.
+          Software Engineer focused on full-stack development, AI, and scalable
+          applications. I turn ideas into usable products — from architecture and
+          implementation to deployment.
         </p>
         <div className="mt-8 flex gap-4">
           <a href="#projects" className="rounded-full bg-signal text-ink px-5 py-2.5 font-medium hover:opacity-90 active:scale-95 transition-all">

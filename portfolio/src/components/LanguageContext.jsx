@@ -14,8 +14,8 @@ export const TRANSLATIONS = {
       resume: "resume",
       contact: "contact",
     },
-    heroTitle1: "Building things",
-    heroTitle2: "that ship.",
+    heroTitle1: "Building software",
+    heroTitle2: "that solves real problems.",
   },
   hi: {
     nav: {
