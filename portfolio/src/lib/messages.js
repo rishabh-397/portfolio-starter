@@ -56,3 +56,15 @@ export async function addMessage(msg) {
   });
   return readMessages();
 }
+
+export async function addSubscriber(email) {
+  const client = await clientPromise;
+  const db = client.db(DB_NAME);
+  await db
+    .collection("subscribers")
+    .updateOne(
+      { _id: email },
+      { $set: { subscribedAt: new Date().toISOString() } },
+      { upsert: true }
+    );
+}

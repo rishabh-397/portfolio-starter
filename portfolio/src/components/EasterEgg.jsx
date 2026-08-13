@@ -14,6 +14,8 @@ export default function EasterEgg() {
   useEffect(() => {
     let progress = 0;
     function handleKeyDown(e) {
+      if (!e || typeof e.key !== "string") return;
+
       const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
       if (key === KONAMI[progress]) {
         progress++;
